@@ -41,10 +41,11 @@ $('#inviteBtn').onclick = () => {
   $('#hint').textContent = 'Invite link copied: '+url;
 };
 
-const ADS = { directLink:'' }; // <-- Dán link Monetag vào đây
+const ADS = { directLink:'https://otieu.com/4/9820710' }; // <-- Dán link Monetag vào đây
 
 function maybeShowAd(){
   if(ADS.directLink){
     window.open(ADS.directLink,'_blank') || (location.href=ADS.directLink);
   }
 }
+
