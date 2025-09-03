@@ -1,0 +1,50 @@
+// Simple clicker logic with referral + Monetag ads
+const $ = sel => document.querySelector(sel);
+const state = {coins:0,energy:100,refs:0,taps:0,lastDaily:0,user:{name:"Guest"},referrer:null};
+
+try {
+  Object.assign(state, JSON.parse(localStorage.getItem('tapdrop_state')||'{}'))
+} catch {}
+
+const save = () => localStorage.setItem('tapdrop_state', JSON.stringify(state));
+
+$('#userName').textContent = state.user.name;
+$('#coins').textContent = state.coins;
+$('#energy').textContent = state.energy;
+$('#refs').textContent = state.refs;
+
+$('#tapBtn').onclick = () => {
+  if(state.energy<=0) return;
+  state.energy--; state.coins++; state.taps++;
+  $('#coins').textContent = state.coins;
+  $('#energy').textContent = state.energy;
+  save();
+  if(state.taps % 200 === 0) maybeShowAd();
+};
+
+$('#claimBtn').onclick = () => {
+  const now = Date.now();
+  if(now - state.lastDaily < 86400000){
+    $('#hint').textContent='Come back tomorrow';
+    return;
+  }
+  state.energy = Math.min(100, state.energy+20);
+  state.lastDaily = now;
+  $('#energy').textContent=state.energy;
+  save();
+  maybeShowAd();
+};
+
+$('#inviteBtn').onclick = () => {
+  const url = location.origin+location.pathname+'?ref='+state.user.name;
+  navigator.clipboard.writeText(url);
+  $('#hint').textContent = 'Invite link copied: '+url;
+};
+
+const ADS = { directLink:'' }; // <-- Dán link Monetag vào đây
+
+function maybeShowAd(){
+  if(ADS.directLink){
+    window.open(ADS.directLink,'_blank') || (location.href=ADS.directLink);
+  }
+}

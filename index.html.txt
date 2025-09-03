@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>TapDrop — Telegram Mini App</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <!-- MONETAG TAG HERE -->
+</head>
+<body>
+  <div class="wrap">
+    <header class="card header">
+      <img src="assets/logo.svg" class="logo" alt="logo">
+      <div>
+        <h1>TapDrop</h1>
+        <p class="sub">Mini game + airdrop style</p>
+      </div>
+      <button id="shareBtn" class="ghost">Share</button>
+    </header>
+    <main class="grid">
+      <section class="card stats">
+        <div><span class="k">User</span><span id="userName">Guest</span></div>
+        <div><span class="k">Coins</span><span id="coins">0</span></div>
+        <div><span class="k">Energy</span><span id="energy">100</span></div>
+        <div><span class="k">Referrals</span><span id="refs">0</span></div>
+      </section>
+      <section class="card game">
+        <button id="tapBtn" class="tap">TAP</button>
+        <button id="claimBtn" class="primary">Claim Daily +20 ⚡</button>
+        <button id="inviteBtn" class="secondary">Invite friends</button>
+        <p id="hint" class="hint"></p>
+      </section>
+    </main>
+    <div id="ad-slot" class="ad-slot"></div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
